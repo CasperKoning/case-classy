@@ -78,6 +78,6 @@ package object defaultDecoders {
     })
 
   val decodeStringToFiniteDuration: Decoder[String, FiniteDuration] =
-    decodeDurationToFiniteDuration compose decodeStringToDuration
+    decodeStringToDuration >>> decodeDurationToFiniteDuration
 
 }

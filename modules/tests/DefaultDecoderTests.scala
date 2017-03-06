@@ -35,53 +35,52 @@ object DefaultChecks {
   def catching[A, B](f: A => B): A => Option[B] =
     (a: A) => scala.util.Try(f(a)).toOption
 
+  def properties(name: String)(props: (String, Prop)*): Properties = {
+    val properties = new Properties(name)
+    props.foreach(p => properties.property(p._1) = p._2)
+    properties
+  }
+
   def stringToBooleanProperties(decoder: Decoder[String, Boolean]): Properties =
-    new Properties("String -> Boolean") {
-      property("section String") = section(decoder)
-      property("retract Boolean") = retraction(decoder)(catching(_.toBoolean))
-    }
+    properties("String to Boolean")(
+      "section String"  -> section(decoder),
+      "retract Boolean" -> retraction(decoder)(catching(_.toBoolean)))
 
   def stringToByteProperties(decoder: Decoder[String, Byte]): Properties =
-    new Properties("String -> Byte") {
-      property("section String") = section(decoder)
-      property("retract Byte") = retraction(decoder)(catching(_.toByte))
-    }
+    properties("String to Byte")(
+      "section String"  -> section(decoder),
+      "retract Byte"    -> retraction(decoder)(catching(_.toByte)))
 
   def stringToShortProperties(decoder: Decoder[String, Short]): Properties =
-    new Properties("String -> Short") {
-      property("section String") = section(decoder)
-      property("retract Short") = retraction(decoder)(catching(_.toShort))
-    }
+    properties("String to Short")(
+      "section String"  -> section(decoder),
+      "retract Short"   -> retraction(decoder)(catching(_.toShort)))
 
   def stringToIntProperties(decoder: Decoder[String, Int]): Properties =
-    new Properties("String -> Int") {
-      property("section String") = section(decoder)
-      property("retract Int") = retraction(decoder)(catching(_.toInt))
-    }
+    properties("String to Int")(
+      "section String"  -> section(decoder),
+      "retract Int"     -> retraction(decoder)(catching(_.toInt)))
 
   def stringToLongProperties(decoder: Decoder[String, Long]): Properties =
-    new Properties("String -> Long") {
-      property("section String") = section(decoder)
-      property("retract Long") = retraction(decoder)(catching(_.toLong))
-    }
+    properties("String to Long")(
+      "section String"  -> section(decoder),
+      "retract Long"    -> retraction(decoder)(catching(_.toLong)))
+
 
   def stringToFloatProperties(decoder: Decoder[String, Float]): Properties =
-    new Properties("String -> Float") {
-      property("section String") = section(decoder)
-      property("retract Float") = retraction(decoder)(catching(_.toFloat))
-    }
+    properties("String to Float")(
+      "section String"  -> section(decoder),
+      "retract Float"   -> retraction(decoder)(catching(_.toFloat)))
 
   def stringToDoubleProperties(decoder: Decoder[String, Double]): Properties =
-    new Properties("String -> Double") {
-      property("section String") = section(decoder)
-      property("retract Double") = retraction(decoder)(catching(_.toDouble))
-    }
+    properties("String to Double")(
+      "section String"  -> section(decoder),
+      "retract Double"  -> retraction(decoder)(catching(_.toDouble)))
 
   def stringToUUIDProperties(decoder: Decoder[String, UUID]): Properties =
-    new Properties("String -> UUID") {
-      property("section String") = section(decoder)(Arbitrary(Gen.uuid))
-      property("retract UUID") = retraction(decoder)(catching(UUID.fromString))
-    }
+    properties("String to UUID")(
+      "section String"  -> section(decoder)(Arbitrary(Gen.uuid)),
+      "retract UUID"    -> retraction(decoder)(catching(UUID.fromString)))
 
 }
 

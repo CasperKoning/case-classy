@@ -93,6 +93,9 @@ trait Decoder[A, B] extends Serializable {
   final def compose[Z](previous: Decoder[Z, A]): Decoder[Z, B] =
     instance(input => previous.apply(input).flatMap(apply))
 
+  final def <<<[Z](previous: Decoder[Z, A]): Decoder[Z, B] =
+    compose(previous)
+
   /** Construct a new decoder by using the output of this decoder as
     * the input of another
     *
@@ -100,6 +103,9 @@ trait Decoder[A, B] extends Serializable {
     */
   final def andThen[C](next: Decoder[B, C]): Decoder[A, C] =
     instance(input => apply(input).flatMap(next.apply))
+
+  final def >>>[C](next: Decoder[B, C]): Decoder[A, C] =
+    andThen(next)
 
   /** Construct a new decoder by joining this decoder with another,
     * tupling the results. Errors accumulate.
