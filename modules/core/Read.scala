@@ -3,9 +3,8 @@
  */
 
 package classy
-package core
 
-import wheel._
+import misc.wheel._
 
 /** Read captures the ability to create a [[Decoder]] given a path string.
   *
@@ -93,7 +92,7 @@ object Read extends ReadInstances0 {
 
 }
 
-private[core] sealed trait ReadInstances0 { self: Read.type =>
+private[classy] sealed trait ReadInstances0 { self: Read.type =>
 
   /** Provides read instances for nested decoder input types. Typically
     * this supports decoding of nested structures or data types.

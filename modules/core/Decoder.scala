@@ -3,11 +3,10 @@
  */
 
 package classy
-package core
 
 import scala.util.{ Either, Right }
 
-import wheel._
+import misc.wheel._
 
 /** A type class capturing the ability to decode data of type `A` to `B`.
   *

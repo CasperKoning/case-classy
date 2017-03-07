@@ -4,7 +4,6 @@
 
 package classy
 
-import core.Decoder
 import generic.derive._
 
 /** Provides automatic derivation of decoders for case class hierarchies.

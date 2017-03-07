@@ -7,7 +7,6 @@ package generic
 
 import shapeless.Lazy
 
-import core._
 import derive._
 
 package object auto {

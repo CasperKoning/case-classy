@@ -3,7 +3,6 @@
  */
 
 package classy
-package core
 
 import scala.annotation.tailrec
 
@@ -166,8 +165,8 @@ object DecodeError extends DecodeErrorInstances {
 
 }
 
-private[core] sealed trait DecodeErrorInstances {
-  import wheel._
+private[classy] sealed trait DecodeErrorInstances {
+  import misc.wheel._
 
   implicit def eitherDecodeErrorApplicative: Applicative[Either[DecodeError, ?]] =
     new instances.EitherApplicative[DecodeError](_ && _)

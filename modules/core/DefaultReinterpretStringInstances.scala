@@ -3,7 +3,6 @@
  */
 
 package classy
-package core
 
 import scala.concurrent.duration.Duration
 import scala.concurrent.duration.FiniteDuration
@@ -12,36 +11,36 @@ import java.util.UUID
 import Read.Reinterpret
 import Read.Reinterpret.{ instance => reinterpret }
 
-private[core] trait DefaultReinterpretStringInstances {
+private[classy] trait DefaultReinterpretStringInstances {
 
   implicit val reinterpretStringToBoolean: Reinterpret[String, Boolean] =
-    reinterpret(defaultDecoders.decodeStringToBoolean)
+    reinterpret(decoders.stringToBoolean)
 
   implicit val reinterpretStringToByte: Reinterpret[String, Byte] =
-    reinterpret(defaultDecoders.decodeStringToByte)
+    reinterpret(decoders.stringToByte)
 
   implicit val reinterpretStringToShort: Reinterpret[String, Short] =
-    reinterpret(defaultDecoders.decodeStringToShort)
+    reinterpret(decoders.stringToShort)
 
   implicit val reinterpretStringToInt: Reinterpret[String, Int] =
-    reinterpret(defaultDecoders.decodeStringToInt)
+    reinterpret(decoders.stringToInt)
 
   implicit val reinterpretStringToLong: Reinterpret[String, Long] =
-    reinterpret(defaultDecoders.decodeStringToLong)
+    reinterpret(decoders.stringToLong)
 
   implicit val reinterpretStringToFloat: Reinterpret[String, Float] =
-    reinterpret(defaultDecoders.decodeStringToFloat)
+    reinterpret(decoders.stringToFloat)
 
   implicit val reinterpretStringToDouble: Reinterpret[String, Double] =
-    reinterpret(defaultDecoders.decodeStringToDouble)
+    reinterpret(decoders.stringToDouble)
 
   implicit val reinterpretStringToUUID: Reinterpret[String, UUID] =
-    reinterpret(defaultDecoders.decodeStringToUUID)
+    reinterpret(decoders.stringToUUID)
 
   implicit val reinterpretStringToDuration: Reinterpret[String, Duration] =
-    reinterpret(defaultDecoders.decodeStringToDuration)
+    reinterpret(decoders.stringToDuration)
 
   implicit val reinterpretStringToFiniteDuration: Reinterpret[String, FiniteDuration] =
-    reinterpret(defaultDecoders.decodeStringToFiniteDuration)
+    reinterpret(decoders.stringToFiniteDuration)
 
 }

@@ -3,7 +3,6 @@
  */
 
 package classy
-package core
 
 import org.scalacheck._
 import org.scalacheck.Arbitrary.arbitrary
@@ -66,7 +65,6 @@ object DefaultChecks {
       "section String"  -> section(decoder),
       "retract Long"    -> retraction(decoder)(catching(_.toLong)))
 
-
   def stringToFloatProperties(decoder: Decoder[String, Float]): Properties =
     properties("String to Float")(
       "section String"  -> section(decoder),
@@ -87,14 +85,14 @@ object DefaultChecks {
 class DefaultDecoderTests extends Properties("defaultDecoders") {
   import DefaultChecks._
 
-  include(stringToBooleanProperties(defaultDecoders.decodeStringToBoolean))
-  include(stringToByteProperties(defaultDecoders.decodeStringToByte))
-  include(stringToShortProperties(defaultDecoders.decodeStringToShort))
-  include(stringToIntProperties(defaultDecoders.decodeStringToInt))
-  include(stringToLongProperties(defaultDecoders.decodeStringToLong))
-  include(stringToFloatProperties(defaultDecoders.decodeStringToFloat))
-  include(stringToDoubleProperties(defaultDecoders.decodeStringToDouble))
-  include(stringToUUIDProperties(defaultDecoders.decodeStringToUUID))
+  include(stringToBooleanProperties(decoders.stringToBoolean))
+  include(stringToByteProperties(decoders.stringToByte))
+  include(stringToShortProperties(decoders.stringToShort))
+  include(stringToIntProperties(decoders.stringToInt))
+  include(stringToLongProperties(decoders.stringToLong))
+  include(stringToFloatProperties(decoders.stringToFloat))
+  include(stringToDoubleProperties(decoders.stringToDouble))
+  include(stringToUUIDProperties(decoders.stringToUUID))
 
 }
 

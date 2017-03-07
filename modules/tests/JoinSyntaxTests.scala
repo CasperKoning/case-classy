@@ -3,7 +3,6 @@
  */
 
 package classy
-package core
 
 import org.scalacheck._
 import org.scalacheck.Prop._

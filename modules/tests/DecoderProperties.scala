@@ -3,7 +3,6 @@
  */
 
 package classy
-package core
 
 import _root_.cats.instances.all._
 import _root_.cats.laws.discipline._

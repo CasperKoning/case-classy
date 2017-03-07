@@ -3,7 +3,7 @@
  */
 
 package classy
-package core.wheel
+package misc.wheel
 
 /** Covariant functor */
 trait Functor[F[_]] extends Serializable {
@@ -60,9 +60,9 @@ object Indexed {
   implicit val listIndexed: Indexed[List] = instances.ListInstance
 }
 
-private[core] object instances {
+private[classy] object instances {
 
-  final class EitherApplicative[Z] private[core] (fz: (Z, Z) => Z) extends Applicative[Either[Z, ?]] {
+  final class EitherApplicative[Z] private[classy] (fz: (Z, Z) => Z) extends Applicative[Either[Z, ?]] {
     def pure[A](a: A): Either[Z, A] = a.right
     def map2[A, B, C](fa: Either[Z, A], fb: Either[Z, B])(f: (A, B) => C): Either[Z, C] =
       (fa, fb) match {

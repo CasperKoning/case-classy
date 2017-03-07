@@ -187,7 +187,7 @@ lazy val docs =
       micrositeName := "Case Classy",
       micrositeAuthor := "the contributors",
       micrositeHighlightTheme := "atom-one-light",
-      micrositeBaseUrl := "/case-classy",
+      //micrositeBaseUrl := "/case-classy",
       micrositeGithubRepo := "case-classy",
       micrositePalette := Map(
         "brand-primary"   -> "#27607D",

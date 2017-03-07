@@ -3,7 +3,6 @@
  */
 
 package classy
-package core
 
 import scala.Predef._
 

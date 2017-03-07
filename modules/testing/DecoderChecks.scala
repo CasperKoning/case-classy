@@ -11,8 +11,6 @@ import org.scalacheck._
 import org.scalacheck.Arbitrary.arbitrary
 import org.scalacheck.Prop._
 
-import core._
-
 object DecoderChecks {
   import DecodeError._
 

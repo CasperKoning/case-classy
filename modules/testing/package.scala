@@ -7,8 +7,6 @@ package classy
 import _root_.cats._
 import org.scalacheck._
 
-import core._
-
 package object testing {
 
   implicit val arbDecodeError: Arbitrary[DecodeError] = {

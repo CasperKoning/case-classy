@@ -9,8 +9,7 @@ package derive
 import shapeless._
 import shapeless.labelled.{ field, FieldType }
 
-import core._
-import core.wheel._
+import misc.wheel._
 
 /** Captures the ability to automatically create a decoder given
   * [[Options]]

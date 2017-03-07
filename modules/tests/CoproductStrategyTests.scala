@@ -13,8 +13,6 @@ import scala.collection.immutable.Map
 import scala.Predef.ArrowAssoc
 import scala.reflect.ClassTag
 
-import core._
-
 class CoproductStrategyTests extends Properties("CoproductStrategy") {
   import DecodeError._
 

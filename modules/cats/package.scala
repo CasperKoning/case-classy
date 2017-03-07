@@ -7,8 +7,6 @@ package classy
 import _root_.cats._
 import _root_.cats.data.Kleisli
 
-import core._
-
 package object cats {
 
   implicit class DecoderCatsOps[A, B](

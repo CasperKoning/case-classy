@@ -3,40 +3,55 @@
  */
 
 package classy
-package core
+package read
+
+import java.io.InputStream
+import java.util.Properties
 
 object stringMap {
 
-  type StringMap = scala.collection.Map[String, String]
-
-  def stringMapDecodeString(key: String): Decoder[StringMap, String] =
-    Decoder.instance(map =>
-      map.get(key).toRight(DecodeError.AtPath(key, DecodeError.Missing)))
-
-  def stringMapDecodeNested(key: String): Decoder[StringMap, StringMap] =
-    Decoder.instance { map =>
-      val prefix = s"$key."
-      val filtered = map.toList
-        .collect {
-          case (path, value) if path.startsWith(prefix) =>
-            (path.substring(prefix.length), value)
-        }.toMap
-
-      if (filtered.isEmpty)
-        DecodeError.AtPath(key, DecodeError.Missing).left
-      else
-        filtered.right
-    }
+  type StringMap     = scala.collection.Map[String, String]
+  type JavaStringMap = java.util.Map[String, String]
 
   implicit val stringMapReadString: Read[StringMap, String] =
-    Read.instance(stringMapDecodeString)
+    Read.instance(decoders.stringMapToString)
 
   implicit val stringMapReadNested: Read[StringMap, StringMap] =
-    Read.instance(stringMapDecodeNested)
+    Read.instance(decoders.stringMapToStringMap)
 
   val readStringMap = Read.from[StringMap]
-}
 
+  implicit class StringMapDecoderOps[A](
+    private val decoder: Decoder[StringMap, A]
+  ) extends AnyVal {
+
+    import scala.collection.convert.{ Wrappers => wrap }
+
+    /** Converts this decoder to a decoder that parses a
+      * `java.util.Map[String, String]` instead of a `Map[String, String]`
+      *
+      * @group stringMap
+      */
+    def fromJavaStringMap: Decoder[JavaStringMap, A] =
+      decoder.mapInput(javaMap => wrap.JMapWrapper(javaMap))
+
+    /** Converts this decoder to a decoder that parses
+      * `java.util.Properties` instead of a `Map[String, String]`
+      *
+      * @group stringMap
+      */
+    def fromProperties: Decoder[Properties, A] =
+      decoder.mapInput(properties => wrap.JPropertiesWrapper(properties))
+  }
+
+  implicit class PropertiesDecoderOps[A](
+    private val decoder: Decoder[Properties, A]
+  ) extends AnyVal {
+
+    def fromInputStream: Decoder[InputStream, A] =
+      decoder <<< decoders.inputStreamToProperties
+  }
+}
 
 import scala.Predef._
 object DOOFUS extends App {
@@ -58,6 +73,14 @@ object DOOFUS extends App {
     read[Boolean]("b") join
     read[UUID]("c")
   ).map(Doof.tupled)
+
+
+  decoders.fileToInputStream       >>>
+  decoders.inputStreamToProperties >>>
+  decoder.fromProperties
+
+
+  val d = decoder.fromProperties.fromInputStream
 
   println("> " + decoder(data))
 

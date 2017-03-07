@@ -3,7 +3,7 @@
  */
 
 package classy
-package core
+package misc
 
 /** A small set of type classes (with partial implementations) needed
   * for some of the internal operations of this library.
